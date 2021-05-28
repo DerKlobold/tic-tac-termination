@@ -1,0 +1,40 @@
+import * as React from 'react';
+import { useGameState } from './GameState';
+import { Board } from './Board';
+import { Row, Column, Title } from './Layout';
+import { Line } from './Line';
+
+function Game() {
+  const {
+    gameState,
+    xIsNext,
+    winner,
+    handleClick,
+  } = useGameState();
+
+  return (
+    <Row gap={1}>
+      <Column gap = {1}>
+
+      </Column>
+      <Column gap={1}>
+        <Title>
+          Tic-Tac-Termination
+        </Title>
+        <div>{
+          winner
+            ? `Winner ${winner}`
+            : `Next Player: ${xIsNext ? 'X' : 'O'}`
+        }</div>
+        <Board 
+          board={gameState.current}
+          activeField = {gameState.activeField}
+          onClick={handleClick} />
+      </Column>
+      <Column gap = {3}>
+        <Line/>
+      </Column>
+    </Row>
+  );
+}
+export default Game;
