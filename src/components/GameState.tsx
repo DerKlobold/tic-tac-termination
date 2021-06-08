@@ -2,20 +2,35 @@ import { useState } from "react";
 
 export type Value = 'X' | 'O' | null | '-';
 
-export type FieldState = Value[];
+export type FieldState = {
+  state: Value[];
+  space: number;
+}
+
 export type BoardState = {
   board: FieldState[];
   state: FieldState;
 }
 
+const createFieldState = () => {
+  let fieldState = {
+    state: Array<Value>(9).fill(null),
+    space: 9,
+  }
+
+  return (
+    fieldState
+  );
+}
+
 const createBoardState = () => {
   let boardState = {
     board: Array<FieldState>(9),
-    state: Array<Value>(9).fill(null),
+    state: createFieldState(),
   }
 
   for(let i = 0; i < boardState.board.length; i++){
-    boardState.board[i] = Array<Value>(9).fill(null);
+    boardState.board[i] = createFieldState();
   }
 
   return boardState;
@@ -34,9 +49,13 @@ function calculateWinner(fieldState: FieldState) {
   ];
   for (let i = 0; i < winningCombinations.length; i++) {
     const [a, b, c] = winningCombinations[i];
-    if (fieldState[a] && fieldState[a] === fieldState[b] && fieldState[a] === fieldState[c]) {
-      return fieldState[a];
+    if (fieldState.state[a] && fieldState.state[a] === fieldState.state[b] && fieldState.state[a] === fieldState.state[c]) {
+      return fieldState.state[a];
     }
+  }
+  //if all spaces are occupied. return '-' to signal a draw
+  if (fieldState.space == 0){
+    return '-';
   }
   return null;
 }
@@ -61,7 +80,7 @@ export function useGameState() {
 
   function handleClick(field: number, square: number) {
 
-    if (current.board[field][square] || calculateWinner(current.state) || calculateWinner(current.board[field])) {
+    if (current.board[field].state[square] || calculateWinner(current.state) || calculateWinner(current.board[field])) {
       return; //cancel if square is not null OR if Game has finished OR field already won/tie
     }
 
@@ -70,18 +89,23 @@ export function useGameState() {
     }
     
     //fill clicked square with current player symbol
-    current.board[field][square] = ((gameState.step % 2) === 0 ? 'X' : 'O');
+    current.board[field].state[square] = ((gameState.step % 2) === 0 ? 'X' : 'O');
+
+    //count down free space variable of clicked field
+    current.board[field].space--;
+
     
     //check if last move led to win on the current field
-    current.state[field] = calculateWinner(current.board[field]);
+    current.state.state[field] = calculateWinner(current.board[field]);
     
-    if (current.state[field]){
+    if (current.state.state[field]){
       if (calculateWinner(current.state)) {
+        //Game is over
         activeField = 9;
       } 
     }
     
-    if (current.state[square]){
+    if (current.state.state[square]){
       activeField = -1; 
     } else {
       activeField = square;

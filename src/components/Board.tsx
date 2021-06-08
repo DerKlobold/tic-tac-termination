@@ -12,7 +12,7 @@ type BoardProps = {
 export function Board({ board, activeField, onClick }: BoardProps) {
 
   const createProps = (field: number): FieldProps => {
-    const state : Value = board.state[field];
+    const state : Value = board.state.state[field];
     const isActive : boolean = (field === activeField || activeField === -1) && state === null && activeField !== 9;
     
     return {

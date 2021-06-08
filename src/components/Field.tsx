@@ -14,7 +14,7 @@ export type FieldProps = {
 export function Field({ field, state, active, onClick }: FieldProps) {
     const createProps = (square: number): SquareProps => {
       return {
-        value: field[square],
+        value: field.state[square],
         onClick: () => onClick(square),
       };
     };

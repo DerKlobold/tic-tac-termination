@@ -22,9 +22,9 @@ function Game() {
           Tic-Tac-Termination
         </Title>
         <div>{
-          winner
-            ? `Winner ${winner}`
-            : `Next Player: ${xIsNext ? 'X' : 'O'}`
+          winner == 'X' || winner == 'O' ? `Winner ${winner}`
+            : winner == '-' ? `Draw!`
+              : `Next Player: ${xIsNext ? 'X' : 'O'}`
         }</div>
         <Board 
           board={gameState.current}
