@@ -1,5 +1,5 @@
 import React from "react";
-import { FieldState, Value } from "./GameState";
+import { FieldState, Value } from "../game-state";
 import { Column, Row, Highlight } from "./Layout";
 import { SquareProps, Square } from "./Square";
 import { Box } from './Box';

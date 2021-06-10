@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field, FieldProps } from './Field';
-import { BoardState, Value } from './GameState';
+import { BoardState, Value } from '../game-state';
 import { Column, Row } from "./Layout";
 
 type BoardProps = {

@@ -110,6 +110,7 @@ export function useGameState() {
     } else {
       activeField = square;
     }
+    
     setGameState({
       current: current,
       step: gameState.step + 1,

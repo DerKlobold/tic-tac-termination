@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGameState } from './GameState';
+import { useGameState } from '../game-state';
 import { Board } from './Board';
 import { Row, Column, Title } from './Layout';
 import { Line } from './Line';
