@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Field, FieldProps } from './Field';
-import { BoardState, Value } from '../game-state';
+import * as React from "react";
+import { Field, FieldProps } from "./Field";
+import { BoardState, Value } from "../game-state";
 import { Column, Row } from "./Layout";
 
 type BoardProps = {
@@ -10,11 +10,13 @@ type BoardProps = {
 };
 
 export function Board({ board, activeField, onClick }: BoardProps) {
-
   const createProps = (field: number): FieldProps => {
-    const state : Value = board.state.state[field];
-    const isActive : boolean = (field === activeField || activeField === -1) && state === null && activeField !== 9;
-    
+    const state: Value = board.state.state[field];
+    const isActive: boolean =
+      (field === activeField || activeField === -1) &&
+      state === null &&
+      activeField !== 9;
+
     return {
       field: board.board[field],
       state: state,
@@ -22,8 +24,8 @@ export function Board({ board, activeField, onClick }: BoardProps) {
       onClick: (square: number) => onClick(field, square),
     };
   };
-  
-  const gap : number = 0.4;
+
+  const gap: number = 0.4;
 
   return (
     <Column gap={gap}>

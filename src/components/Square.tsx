@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import * as React from 'react';
-import { Value } from '../game-state';
+import styled from "styled-components";
+import * as React from "react";
+import { Value } from "../game-state";
 
 export type SquareProps = {
   value: Value;
@@ -8,11 +8,7 @@ export type SquareProps = {
 };
 
 export function Square(props: SquareProps) {
-  return (
-    <StyledSquare onClick={props.onClick}>
-      {props.value}
-    </StyledSquare>
-  );
+  return <StyledSquare onClick={props.onClick}>{props.value}</StyledSquare>;
 }
 
 export const StyledSquare = styled.button`

@@ -1,4 +1,5 @@
 # Tic-Tac-Termination
+
 An extension to the classic tic tac toe as a local browser game.
 
 At the current state you will need Node.js to run the game.
