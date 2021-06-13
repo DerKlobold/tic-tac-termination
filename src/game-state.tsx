@@ -56,7 +56,7 @@ function calculateWinner(fieldState: FieldState) {
 		}
 	}
 	//if all spaces are occupied. return '-' to signal a draw
-	if (fieldState.space == 0) {
+	if (fieldState.space === 0) {
 		return "-";
 	}
 	return null;

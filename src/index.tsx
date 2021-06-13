@@ -1,15 +1,18 @@
 import "./index.css";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { CSSReset, ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import Game from "./components/Game";
 import * as serviceWorker from "./serviceWorker";
+import { theme } from "./theme";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<ChakraProvider>
+		<ColorModeScript initialColorMode={theme.config.initialColorMode} />
+		<ChakraProvider theme={theme}>
+			<CSSReset />
 			<Game />
 		</ChakraProvider>
 	</React.StrictMode>,

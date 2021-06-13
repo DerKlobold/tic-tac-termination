@@ -1,8 +1,8 @@
+import { Grid, GridItem } from "@chakra-ui/layout";
 import * as React from "react";
 
-import { BoardState, Value } from "../game-state";
-import { Field, FieldProps } from "./Field";
-import { Column, Row } from "./Layout";
+import { BoardState } from "../game-state";
+import { Field } from "./Field";
 
 type BoardProps = {
 	board: BoardState;
@@ -10,39 +10,20 @@ type BoardProps = {
 	onClick: (field: number, square: number) => void;
 };
 
-export function Board({ board, activeField, onClick }: BoardProps) {
-	const createProps = (field: number): FieldProps => {
-		const state: Value = board.state.state[field];
-		const isActive: boolean =
-			(field === activeField || activeField === -1) && state === null && activeField !== 9;
-
-		return {
-			field: board.board[field],
-			state: state,
-			active: isActive,
-			onClick: (square: number) => onClick(field, square),
-		};
-	};
-
-	const gap: number = 0.4;
-
-	return (
-		<Column gap={gap}>
-			<Row gap={gap}>
-				<Field {...createProps(0)} />
-				<Field {...createProps(1)} />
-				<Field {...createProps(2)} />
-			</Row>
-			<Row gap={gap}>
-				<Field {...createProps(3)} />
-				<Field {...createProps(4)} />
-				<Field {...createProps(5)} />
-			</Row>
-			<Row gap={gap}>
-				<Field {...createProps(6)} />
-				<Field {...createProps(7)} />
-				<Field {...createProps(8)} />
-			</Row>
-		</Column>
-	);
-}
+export const Board: React.FC<BoardProps> = ({ board, activeField, onClick }) => (
+	<Grid templateColumns="repeat(3, 1fr)">
+		{board.board.map((field, index) => (
+			<GridItem padding={2}>
+				<Field
+					field={field}
+					active={
+						(index === activeField || activeField === -1) &&
+						board.state.state[index] === null &&
+						activeField !== 9
+					}
+					onClick={(square: number) => onClick(index, square)}
+				/>
+			</GridItem>
+		))}
+	</Grid>
+);
