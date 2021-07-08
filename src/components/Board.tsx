@@ -20,7 +20,7 @@ export const Board: React.FC<BoardProps> = ({ board, activeField, onClick }) => 
 						(index === activeField || activeField === -1) &&
 						board.state.state[index] === null &&
 						activeField !== 9
-					}
+					} //TODO move to state management
 					onClick={(square: number) => onClick(index, square)}
 				/>
 			</GridItem>
